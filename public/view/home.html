@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../icons8-consumption-96.png">
+  <title>Expense Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Kavoon&family=Metal+Mania&family=Poppins:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+ <!-- navbar -->
+ <div class="flex  items-center  w-screen mx-auto mb-5 bg-[#65beb2c1] rounded-md">
+   <div class="flex items-center py-2">
+      <img src="../icons8-consumption-96.png" class="hidden md:block h-[50px] w-[60px] p-2 ml-6" alt="Header Image" />        
+      <div class=" text-center"><span class="text-xl font-[Kavoon]  text-[#002D74]">Expense Tracker</span></div>
+  </div>
+
+    <div class="w-screen">
+    <div class="flex items-center px-1">
+      <span  class="px-2 text-blue-700  font-bold " id="memtype"></span>
+      <button id="buyPremiumBtn"  class="py-2 px-3 mx-auto mr-3  bg-blue-400 rounded-md shadow-md hover:bg-blue-900 text-white font-medium transition duration-300">Buy Premium</button>
+      <button id="downloadReportBtn" onclick="downloadReport()" class="hidden py-2 px-3 ml-4 mr-3 bg-green-700  shadow-md text-white font-medium rounded hover:bg-green-400 transition duration-300">Download</button>
+      <button id="logoutBtn"  class="py-2 px-3 bg-red-400 shadow-md hover:bg-red-900 text-white font-medium rounded transition duration-300">Logout</button>
+    </div>
+    </div>
+  </div>
+<!-- /nav -->
+
+
+  <div class="container w-screen ">    
+    <!--  main container -->
+    <div class="w-screen text-center mt-1"><span id="loggedName" class=" text-gray-700 text-xl hover:text-gray-900"></span></div>
+    <div class="w-screen  sm:flex mb-2 p-2 ">
+      <!-- form container -->
+      <div class="sm:w-screen mx-auto lg:w-1/3 xl:w-1/3 p-3 ">
+        <form id="my-form" onsubmit="saveToDb(event)"
+          class=" border bg-gray-100 border-gray-300 shadow-xl rounded-md px-8 pt-6 pb-8 mb-4">
+          <div class="mb-3 text-center border border-gray-300 shadow-sm ">
+            <input class="ExpenseTypeRadio  appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-[#002D74]  mr-2 cursor-pointer" type="radio" name="amountType" id="expenseRadio" value="expense" required>
+            <label class="inline-block text-[#002D74] text-sm font-bold" for="expenseRadio">Expense</label>
+            <input class="ExpenseTypeRadio  appearance-none rounded-full h-4 w-4 ml-2 border border-gray-300 bg-white checked:bg-blue-600 checked:border-[#002D74]  mr-2 cursor-pointer" type="radio" name="amountType" id="incomeRadio" value="income" required>
+            <label class="inline-block text-[#002D74] text-sm font-bold " for="incomeRadio">Income</label>
+          </div>
+          <div class="mb-3">
+            <label class="text-[#002D74] block  text-sm font-bold mb-2" for="addexpenseinput">
+              Expense Amount
+            </label>
+            <input type="text" placeholder="Enter expense amount" id="addexpenseinput"
+              class="bg-white-500 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              required>
+          </div>
+          <div class="mb-3">
+            <label class="block text-[#002D74] text-sm font-bold mb-2" for="addexpensedescription">
+              Expense Description
+            </label>
+            <input type="text" id="addexpensedescription" placeholder="Enter expense description"
+              class="bg-white-500 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="block text-[#002D74] text-sm font-bold mb-2">Expense Category</label>
+            <select id="addexpensecategory"
+              class="bg-white-500 appearance-none border-2 rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              required>
+              <option></option>
+              <option value="Fuel">Fuel</option>
+              <option value="Movie">Movie</option>
+              <option value="Food">Food</option>
+              <option value="Electricity">Electricity</option>
+              <option value="Salary">Salary</option>
+            </select>
+          </div>
+          <div class="flex items-center justify-between">
+            <button type="submit"
+              class="rounded-xl py-2  bg-[#002D74] text-white max-w-full px-8 hover:scale-105 duration-300 hover:bg-[#5f93e7]"
+              id="addexpensebtn" style="display: block;">
+              Add Expense
+            </button>
+            <button type="button"
+              class="rounded-xl py-2  bg-[#002D74] text-white max-w-full px-8 hover:scale-105 hover:duration-300 hover:bg-[#5f93e7]"
+              id="updateexpensebtn" style="display: none;">
+              Update Expense
+            </button>
+          </div>
+        </form>
+
+        <!-- leaderboard btn -->
+        <div id="leaderBtnHolder" class=" w-full text-center mt-4">
+          <!-- leaderBoardBtn -->
+          <!-- showDownload Btn -->
+        </div>
+
+        <!-- Success alert -->
+        <div id="success-alert" class="bg-green-500 text-white p-3 font-bold hidden ">
+        </div>
+
+        <!-- deletion-alert -->
+        <div id="deletion-alert" class="bg-red-400 text-white font-bold p-3 hidden">
+        </div>
+
+        <!-- error alert -->
+        <div id="error-alert" class="bg-red-400 text-white p-3 hidden">
+          <span class="error-textMsg font-bold"></span>
+          <button id="close-button" class="bg-red-500 text-white rounded-full ">
+            <span class="font-bold justify-end px-2">X</span>
+          </button>
+        </div>
+
+      </div>
+
+
+
+      <!--  Expense Data Conatiner -->
+      <div class=" mx-auto sm:w-screen  lg:w-2/3 xl:w-2/3 m-5 lg:max-h-screen mb-2  " id="tableitems">
+        <!-- Expense Records Table -->
+         <div class="max-w-[99%] ">
+        <table class="w-full shadow-xl rounded mx-auto mb-2  text-center  ">
+          <thead>
+            <tr class="bg-gray-300 text-gray-800 font-bold text-sm">
+            <th class="py-3 px-1 border-b border-gray-400">Income</th>
+            <th class="py-3 px-1 border-b border-gray-400">Expense</th>
+            <th class="py-3 px-1 border-b border-gray-400">Description</th>
+            <th class="py-3 px-1 border-b border-gray-400">Category</th>
+            <th class="py-3 px-1 border-b border-gray-400">Date</th>
+            <th class="py-3 pl-1 border-b border-gray-400">Actions</th>           
+            </tr>
+          </thead>
+          <tbody class="text-center" id="addedexpenselist">
+            <!-- Expense Table goes here -->
+          </tbody>
+        </table>
+        
+        <!-- PAGINATION-->
+        <div class="w-full text-center m-1 p-1 mb-3 ">
+          <div id="paginationContainer">
+            <button id="prevPage"
+              class="px-3 py-1 ml-0  bg-white border border-gray-400 rounded-l-lg shadow-md hover:bg-green-300 hover: hover:text-white font-semibold">Previous</button>
+            <span id="pageNumber" class="m-1 px-1 py-1 w-7 border border-gray-400 bg-white text-gray-500 "></span>
+            <button id="nextPage"
+              class="px-3 py-1 ml-0  bg-white border border-gray-300 rounded-r-lg shadow-md hover:bg-green-300  hover:text-white font-semibold">Next</button>
+              
+            <div class="md:flex  mx-auto ">
+              <span class="text-gray-500 font-serif md:ml-2 mr-2 ">showing <span id="showingcurrPage"></span> of <span id="showingRange"></span></span>
+           
+              <label class="text-right font-medium mr-2" for="pageLimit">Expenses per page:</label>
+              <input type="number" id="pageLimit" class="w-10 py-1 px-1 text-gray-600 border border-gray-400 rounded-sm" min="1" paceholder="5">
+              <button id="savePageLimit" class="px-3 py-1 ml-0  bg-white border border-gray-300 rounded-r-lg shadow-md hover:bg-green-300  hover:text-white font-semibold">Save</button>
+            </div>
+            </div>          
+        </div>
+        <!-- PAGINATION -->
+        </div> 
+
+      </div>
+    </div>
+
+
+
+    <!--- Premium user Feature Leader Board -->
+    <div class="container w-full md:flex">
+      <div class="container w-full mt-5 md:w-1/2 p-4  mx-auto hidden " id="leaderBoardTable">
+        <!-- Leader Board Table -->
+        <div class="text-center rounded-t-md bg-green-300 p-1 font-bold " id="leadermsg">LeaderBoard</div>
+        <table class="w-full shadow-xl rounded mx-auto ">
+          <thead>
+            <tr class="bg-gray-300 text-[#002D74] font-bold text-sm">
+              <th class="py-2 px-2 border-b border-gray-400">Name</th>
+              <th class="py-2 px-2 border-b border-gray-400">Total Expense Amount</th>
+            </tr>
+          </thead>
+          <tbody class="text-center" id="addedLeaderBoardlist">
+            <!-- <tr class=" text-sm hover:bg-gray-100">
+          <td class="py-2 px-3 border-b border-gray-400">Atul</td>
+          <td class="py-2 px-3 border-b border-gray-400"><span class="font-bold">&#x20b9; </span>567</td>
+        </tr>   -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="container w-full mt-5 md:w-1/2 p-4 ml-2 mx-auto hidden " id="downloadsTable">
+        <div class="text-center rounded-t-md bg-green-300 p-1 font-bold ">Downloads History</div>
+        <table class="w-full shadow-xl rounded mx-auto ">
+          <thead>
+            <tr class="bg-gray-300 text-[#002D74] font-bold text-sm">
+              <th class="py-2 px-2 border-b border-gray-400">Downloaded On</th>
+            </tr>
+          </thead>
+          <tbody class="text-center" id="addedDownloadlist">
+            <!-- <tr class=" text-sm hover:bg-gray-100">
+           <td class="py-2 px-3 border-b border-gray-400"><span class="font-bold">&#x20b9; </span>567</td>
+         </tr>   -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+ 
+  <script src="../js/script.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="../js/axios.js"></script>
+  </div>
+</body>
+
+</html>

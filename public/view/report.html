@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../icons8-consumption-96.png">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+<div class="max-w-[1220px] max-h-screen mx-auto">
+  <!-- header -->
+  <div class=" flex items-center  w-screen mx-auto mb-5 bg-[#65beb2c1] rounded-md">
+    <div class="w-1/2 flex items-center gap-3 py-2">
+        <img src="../icons8-consumption-96.png" class="h-[50px] w-[60px] p-2 ml-6" alt="Header Image" />        
+        <div class=" text-center"><span class="text-xl font-[Kavoon]  text-[#002D74]">Expense Tracker</span></div>
+    </div>
+    <div class="w-1/2 text-center font-[Kavoon] text-3xl py-2">
+        <span class="">OverAll Expense Report</span></div>
+    </div>
+  </div>
+
+  <!--  main container -->
+  <div class="container">
+    <div id="printdate" class="w-full text-start ml-5 mb-2 text-[#182c4d] font-mono">17 January 2023, 02:30PM</div>
+    <div id="printYear" class="w-full text-center font-bold text-3xl mb-2">2023</div>
+    <div id="printMonthYear" class="w-full text-center font-bold text-xl mb-3">January 2023</div>
+  </div>
+
+    <div id="monthlyData" class="container rounded-md max-w-5xl  mx-auto ">
+        <table class="min-w-full text-center border shadow-emerald-100 shadow-md ">
+            <thead class=" bg-[#55c3c3]">  
+              <tr class="">
+                <th>Serial Number</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Income</th>
+                <th >Expense</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm font-medium text-gray-900  py-1">
+              <tr class="border-b bg-[#e6e6f4ee] border-gray-400">
+                <td>1</td>
+                <td>1 jan 2023</td>
+                <td >Salary</td>
+                <td >December 2022 Salary</td>
+                <td >40000</td>
+                <td>0</td>
+              </tr>
+              <tr class="border-b bg-[#f5e5e5] border-red-200">
+                <td>2</td>
+                <td>1 jan 2023</td>
+                <td >Food</td>
+                <td >Dinner</td>
+                <td >0</td>
+                <td>2000</td>
+              </tr>
+              <tr >
+                <td></td>
+                <td></td>
+                <td ></td>
+                <td clas="text-black-700 font-bold">At the Day End</td>
+                <td clas="text-black-700 font-bold">40000</td>
+                <td clas="text-black-700 font-bold">2000</td>
+              </tr>
+              <tr class="border-b bg-[#f5e5e5] border-red-200">
+                <td>3</td>
+                <td>2 jan 2023</td>
+                <td >Food</td>
+                <td >Milk</td>
+                <td >0</td>
+                <td>100</td>
+              </tr>
+              <tr >
+                <td></td>
+                <td></td>
+                <td ></td>
+                <td clas="text-black-700 font-bold">At the Day End</td>
+                <td clas="text-black-700 font-bold">0</td>
+                <td clas="text-black-700 font-bold">100</td>
+              </tr>
+              <tr class="border-b bg-[#d6d6fbee] border-gray-200">
+                <td></td>
+                <td ></td>
+                <td></td>
+                <td></td>
+                <td class="text-green-700 font-semibold">40000</td>
+                <td class="text-red-700 font-semibold">30000</td>
+              </tr>
+              <tr class="border-b bg-[#d6d6fbee] border-gray-200">
+                <td colspan="5"></td>
+                <td class="text-blue-900 font-bold py-1">Savings = 10000</td>
+             </tr>
+            </tbody>
+          </table>
+        </div> 
+
+        <br>
+        <br>
+        <br>
+
+        <div class="container">
+            <div  class="w-full text-center font-bold text-xl mb-3">Yearly Report</div>
+        </div>
+        
+            <div id="yearlyData" class="container rounded-md max-w-5xl  mx-auto ">
+                <table class="min-w-full text-center border shadow-emerald-100 shadow-md ">
+                    <thead class=" bg-[#a1e0e0]">  
+                      <tr class="">
+                        <th>Month</th>
+                        <th>Income</th>
+                        <th >Expense</th>
+                        <th>Savings</th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-sm font-medium text-gray-900 px-6 py-4">
+                       <tr >
+                            <td >December</td>
+                            <td >40000</td>
+                            <td >30000</td>
+                            <td >10000</td>
+                          </tr>
+                      <tr class="border-b bg-[#d6d6fbee] border-gray-200">
+                        <td ></td>
+                        <td class="text-green-700 font-semibold">40000</td>
+                        <td class="text-red-700 font-semibold">30000</td>
+                        <td class="text-blue-900 font-semibold">10000</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> 
+        
+                <br>
+                <hr>
+                <br>
+        
+    </div>
+ 
+</body>
+</html>
